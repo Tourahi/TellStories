@@ -6,7 +6,8 @@ const morgan    = require('morgan');
 const expHBS    = require('express-handlebars');
 const passport  = require('passport');
 const session   = require('express-session');
-
+const MongoSessionStore = require('connect-mongo')(session);
+const mongoose  = require('mongoose');
 
 
 //Load config
@@ -37,17 +38,20 @@ app.engine('.hbs', expHBS(
 app.use(session({
   secret: 'keyboard caty cat',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store  : new MongoSessionStore( {mongooseConnection : mongoose.connection })
 }));
 
 //passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Other middleware
+app.use(express.urlencoded({ extended:false }));
+app.use(express.json());
+
 //Static folder
-
 app.use(express.static(path.join(__dirname , 'public')));
-
 
 
 app.set('view engine', '.hbs');
@@ -55,6 +59,7 @@ app.set('view engine', '.hbs');
 //Routes
 app.use('/',require('./routes/index'));
 app.use('/auth',require('./routes/auth'));
+app.use('/stories',require('./routes/stories'));
 
 
 app.listen(
