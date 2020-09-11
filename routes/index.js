@@ -15,7 +15,7 @@ router.get('/' , keepGest ,(req , res) => {
 // @ met/route GET /dashboard
 router.get('/dashboard' ,ensureAuth ,async (req , res) => {
   try {
-    const stories = await Story.find({ userId : req.user.id }).lean(); //lean to get JSON form of the mongoose obj
+    const stories = await Story.find({ user : req.user.id }).lean(); //lean to get JSON form of the mongoose obj
     res.render('dashboard' , {
       name : req.user.firstName,
       stories
