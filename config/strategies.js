@@ -1,9 +1,9 @@
-const User = require('../models/User');
+const User = require('../models/ForeignUser');
 
 const authStrategies = {};
 
 authStrategies.google = async (accessToken,refreshToken,profile,done) => {
-  // console.log(profile);
+  console.log(profile);
   const newUser = {
     googleId    : profile.id,
     displayName : profile.displayName,
