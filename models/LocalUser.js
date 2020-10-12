@@ -28,6 +28,13 @@ const LocalUserSchema = new mongoose.Schema({
     type : Date,
     default : Date.now
   }
+},{
+  toObject: {
+    virtuals: true,
+  },
+  toJSON: {
+    virtuals: true,
+  }
 });
 
 LocalUserSchema.pre('remove' , async function(next){
@@ -40,4 +47,4 @@ LocalUserSchema.virtual('stories' , {
   foreignField : 'user'
 });
 
-module.exports = mongoose.model('Fuser' , LocalUserSchema);
+module.exports = mongoose.model('Luser' , LocalUserSchema);

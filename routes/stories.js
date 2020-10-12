@@ -28,11 +28,15 @@ router.post('/', ensureAuth ,async (req , res) => {
 // @ met/route GET /
 router.get('/', ensureAuth ,async (req , res) => {
   try {
-    const stories = await Story.find({ status : 'public' })
-    .populate('user')
-    .lean();
+    const stories = await Story.find({ status : 'public' }).lean();
     res.render('stories/index',{
-      stories
+      stories,
+      user : req.user.toObject()
+      // we need a new object, were hasOwnProperty
+      //is true for the values being referenced
+      //so you don't get the error :
+      //Access has been denied to resolve the property
+      //"X" because it is not an "own property" of its parent.
     })
   } catch (e) {
     console.log(e);

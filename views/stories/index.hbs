@@ -11,11 +11,10 @@
           <p>{{stripTags (truncate body)}}</p>
           <br>
           <div class="chip">
-            <img src="{{user.image}}" alt="">
-            <a href="/stories/user/{{user._id}}">{{user.displayName}}</a>
+            <img src="{{../user.image}}" alt="">
+            <a href="/stories/user/{{../user._id}}">{{../user.displayName}}</a>
           </div>
         </div>
-
         <div class="card-action center-align">
           <a href="/stories/{{_id}}" class="btn grey">Read More</a>
         </div>

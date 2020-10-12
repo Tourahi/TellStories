@@ -25,16 +25,19 @@ const ForeignUserSchema = new mongoose.Schema({
     type : Date,
     default : Date.now
   }
+},{
+  toObject: {
+    virtuals: true,
+  },
+  toJSON: {
+    virtuals: true,
+  }
 });
 
 ForeignUserSchema.pre('remove' , async function(next){
   await Story.deleteMany({user : this._id});
 });
 
-ForeignUserSchema.virtual('stories' , {
-  ref : 'Story',
-  localField : '_id',
-  foreignField : 'user'
-});
+
 
 module.exports = mongoose.model('Fuser' , ForeignUserSchema);

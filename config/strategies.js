@@ -1,4 +1,4 @@
-const User = require('../models/ForeignUser');
+const Fuser = require('../models/ForeignUser');
 
 const authStrategies = {};
 
@@ -13,12 +13,12 @@ authStrategies.google = async (accessToken,refreshToken,profile,done) => {
   };
 
   try {
-    let user = await User.findOne({ googleId :  profile.id});
+    let user = await Fuser.findOne({ googleId :  profile.id});
     if (user) {
       done(null , user);
     }
     else {
-      user = User.create(newUser);
+      user = Fuser.create(newUser);
       done(null , user);
     }
   } catch (err) {
