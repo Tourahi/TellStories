@@ -1,0 +1,12 @@
+
+TODO :
+  [] : Add validations to the user module
+  [] : Create the middlewares needed for ::
+       {
+          IsUserAlreadyExisting,
+          emailExist,
+          usernameExist,
+          IsUserExisting,
+          checkPassword,
+          isAuth --- the same as google strategy.
+       }

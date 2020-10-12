@@ -14,6 +14,10 @@ router.get('/google/callback' , passport.authenticate('google' , {
   res.redirect('/dashboard');
 });
 
+//Local Authentication
+
+ 
+
 // @desc  Logout user
 // @met/route GET /auth/logout
 router.get('/logout' , (req , res) => {
