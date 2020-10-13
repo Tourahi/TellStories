@@ -19,18 +19,18 @@ authCtrl.registerCtrl = async (req , res) => {
   const salt  = await bcrypt.genSalt(10);
   // Still need to parse the body
   const hashedPass = await bcrypt.hash(req.body.password , salt);
-
+  const displayName = req.body.username;
   const user = new Luser({
-    email : req.body.email,
-    displayName : req.body.username,
+    displayName : displayName,
     firstName   : req.body.firstName,
     lastName    : req.body.lastName,
     image       : "", //req.body.image Save the buffer,
-    password    : req.body.password
+    password    : req.body.password,
+    email       : req.body.email
   });
   try {
     await user.save();
-    return res.status.send(200).json(user);
+    return res.status(200).json(user);
   }catch(e)  {
     es.status.send(400).json({err : "Did not register."});
   }

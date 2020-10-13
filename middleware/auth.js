@@ -1,9 +1,12 @@
 const Luser  = require('../models/LocalUser.js');
+const Fuser  = require('../models/ForeignUser.js');
 const bcrypt = require('bcryptjs');
 
 const IsUserAlreadyExisting = async (req,res,next) => {
-  const emailExist = await Luser.findOne({email : req.body.email});
-  const usernameExist = await Luser.findOne({ displayName : req.body.username });
+  const emailExist    = await Luser.findOne({email : req.body.email})
+                        || await Fuser.findOne({email : req.body.email});
+  const usernameExist = await Luser.findOne({ displayName : req.body.username })
+                        || await Fuser.findOne({ displayName : req.body.username });
   if(emailExist || usernameExist){
     return res.status(400).json({err : "User already exist."});
   }

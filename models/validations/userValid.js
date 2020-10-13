@@ -2,7 +2,7 @@ const Joi = require('@hapi/joi');
 
 const RegisterValidationSch = Joi.object({
   //displayName , firstName , lastName , image
-  displayName : Joi.string()
+  username : Joi.string()
                    .min(6)
                    .alphanum()
                    .required(),

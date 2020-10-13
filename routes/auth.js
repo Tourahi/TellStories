@@ -30,6 +30,9 @@ router.get('/google/callback' , passport.authenticate('google' , {
 
 //Local Authentication
 
+router.get('/register',(req , res) => {
+  res.json({OY : "We here Brudah"});
+});
 //Register
 router.post('/register',IsUserAlreadyExisting , registerCtrl);
 //Login
