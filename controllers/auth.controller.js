@@ -36,23 +36,6 @@ authCtrl.registerCtrl = async (req , res) => {
   }
 }
 
-// verifyCallback for the passport strategy
-authCtrl.verifyCallback = async (username , password , done) => {
-  Luser.findOne({displayName : username})
-      .then(async (user) => {
-        if(!user) return done(null, false)
-        const isValid =  await validPassword(username , password);
-        if(isValid) {
-          return  done(null, user);
-        }else{
-          return done(null, false);
-        }
-      })
-      .catch((err) => {
-        done(err);
-      });
-};
-
 authCtrl.loginSuccess = (req , res , next) => {
   res.status(200).json({ user : req.user});
 };

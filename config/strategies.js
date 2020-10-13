@@ -26,4 +26,21 @@ authStrategies.google = async (accessToken,refreshToken,profile,done) => {
   }
 }
 
+//Local Strategie
+authStrategies.verifyCallback = async (username , password , done) => {
+  Luser.findOne({displayName : username})
+      .then(async (user) => {
+        if(!user) return done(null, false)
+        const isValid =  await validPassword(username , password);
+        if(isValid) {
+          return  done(null, user);
+        }else{
+          return done(null, false);
+        }
+      })
+      .catch((err) => {
+        done(err);
+      });
+};
+
 module.exports = authStrategies;

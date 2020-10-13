@@ -9,9 +9,12 @@ const session   = require('express-session');
 const MongoSessionStore = require('connect-mongo')(session);
 const mongoose  = require('mongoose');
 const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 
 //Load config
 dotenv.config({ path : './config/config.env'});
+
+
 
 //Passport config
 require('./config/passport')(passport);
@@ -21,7 +24,9 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 3030;
 
-
+//Parser
+app.use(bodyParser.urlencoded({extended : false}));
+app.use(bodyParser.json());
 
 if(process.env.NODE_ENV = 'develepment') {
   app.use(morgan('dev'));

@@ -2,6 +2,14 @@ const express   = require('express');
 const router    = express.Router();
 const passport  = require('passport');
 
+//Costume middleware for local users
+const {
+  IsUserExisting,
+  IsUserAlreadyExisting,
+  checkPassword,
+} = require('../middleware/auth.js');
+
+
 // @desc  Auth whit google
 // @met/route GET /auth/google
 router.get('/google' , passport.authenticate('google' , { scope : ['profile']}));

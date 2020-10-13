@@ -46,6 +46,9 @@ const keepGest = (req , res , next) => {
 }
 
 module.exports = {
+  IsUserExisting,
+  IsUserAlreadyExisting,
+  checkPassword,
   ensureAuth,
   keepGest
 }
