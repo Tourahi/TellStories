@@ -1,7 +1,7 @@
 
 TODO :
   [X] : Add validations to the user module
-  [] : Create the middlewares needed for ::
+  [ ] : Create the middlewares needed for ::
        {
           IsUserAlreadyExisting,
           emailExist,

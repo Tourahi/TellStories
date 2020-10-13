@@ -30,14 +30,15 @@ authCtrl.registerCtrl = async (req , res) => {
   });
   try {
     await user.save();
+    return res.status.send(200).json(user);
   }catch(e)  {
-    //TODO
+    es.status.send(400).json({err : "Did not register."});
   }
 }
 
 // verifyCallback for the passport strategy
 authCtrl.verifyCallback = async (username , password , done) => {
-  Luser.find({displayName : username})
+  Luser.findOne({displayName : username})
       .then(async (user) => {
         if(!user) return done(null, false)
         const isValid =  await validPassword(username , password);
@@ -53,11 +54,11 @@ authCtrl.verifyCallback = async (username , password , done) => {
 };
 
 authCtrl.loginSuccess = (req , res , next) => {
-  //TODO
+  res.status(200).json({ user : req.user});
 };
 
 authCtrl.loginFailure = (req , res , next) => {
-  //TODO
+  res.status(400).json({ err : 'You are not Authenticated'});
 }
 
 module.exports = authCtrl;
